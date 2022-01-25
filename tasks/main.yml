@@ -6,6 +6,7 @@
     cmd: "LANG=C subscription-manager repos|grep -A 3 codeready-builder-for-rhel-8-{{ ansible_architecture }}-rpms|grep '^Enabled.*$'"
   register: subscription_manager_output
   check_mode: 'false'
+  changed_when: 'false'
 
 - name: 'Debug: Output variable subscription_manager_output'
   debug:
