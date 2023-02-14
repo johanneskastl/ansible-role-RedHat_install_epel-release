@@ -2,7 +2,7 @@
 # RedHat_install_epel-release/tasks/main.yml
 
 - name: 'Check if codeready-builder-for-rhel-8 repository is enabled already'
-  shell:
+  ansible.builtin.shell:
     cmd: "LANG=C subscription-manager repos|grep -A 3 codeready-builder-for-rhel-8-{{ ansible_architecture }}-rpms|grep '^Enabled.*$'"
   register: subscription_manager_output
   check_mode: 'false'
@@ -12,7 +12,7 @@
     - 'ansible_distribution_major_version == "8"'
 
 - name: 'Check if codeready-builder-for-rhel-9 repository is enabled already'
-  shell:
+  ansible.builtin.shell:
     cmd: "LANG=C subscription-manager repos|grep -A 3 codeready-builder-for-rhel-9-{{ ansible_architecture }}-rpms|grep '^Enabled.*$'"
   register: subscription_manager_output
   check_mode: 'false'
@@ -22,19 +22,19 @@
     - 'ansible_distribution_major_version == "9"'
 
 - name: 'Debug: Output variable subscription_manager_output'
-  debug:
+  ansible.builtin.debug:
    var: subscription_manager_output
   when: 'ansible_distribution == "RedHat"'
 
 - name: 'install epel-release key via https'
-  rpm_key:
+  ansible.builtin.rpm_key:
     key: 'https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}'
     state: 'present'
   when: 'ansible_distribution == "RedHat"'
   ignore_errors: "{{ ansible_check_mode |default(false)}}"
 
 - name: 'Enable the codeready-builder-for-rhel-8 repository'
-  shell:
+  ansible.builtin.shell:
     cmd: 'subscription-manager repos --enable codeready-builder-for-rhel-8-$(arch)-rpms'
   when:
     - 'ansible_distribution == "RedHat"'
@@ -42,7 +42,7 @@
     - '"0" in subscription_manager_output.stdout'
 
 - name: 'Enable the codeready-builder-for-rhel-9 repository'
-  shell:
+  ansible.builtin.shell:
     cmd: 'subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms'
   when:
     - 'ansible_distribution == "RedHat"'
@@ -50,7 +50,7 @@
     - '"0" in subscription_manager_output.stdout'
 
 - name: 'install package epel-release'
-  package:
+  ansible.builtin.package:
     name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
     state: 'present'
   when: 'ansible_distribution == "RedHat"'
@@ -60,7 +60,7 @@
     - "run 'dnf makecache'"
 
 - name: 'install epel-release key from /etc/pki/rpm-gpg/'
-  rpm_key:
+  ansible.builtin.rpm_key:
     key: '/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}'
     state: 'present'
   when: 'ansible_distribution == "RedHat"'
