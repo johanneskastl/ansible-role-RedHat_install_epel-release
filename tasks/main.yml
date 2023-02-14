@@ -26,7 +26,7 @@
    var: subscription_manager_output
   when: 'ansible_distribution == "RedHat"'
 
-- name: 'install epel-release key via https'
+- name: 'Install epel-release key via https'
   ansible.builtin.rpm_key:
     key: 'https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}'
     state: 'present'
@@ -49,7 +49,7 @@
     - 'ansible_distribution_major_version == "9"'
     - '"0" in subscription_manager_output.stdout'
 
-- name: 'install package epel-release'
+- name: 'Install package epel-release'
   ansible.builtin.package:
     name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
     state: 'present'
@@ -59,7 +59,7 @@
     - "run 'yum makecache fast'"
     - "run 'dnf makecache'"
 
-- name: 'install epel-release key from /etc/pki/rpm-gpg/'
+- name: 'Install epel-release key from /etc/pki/rpm-gpg/'
   ansible.builtin.rpm_key:
     key: '/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}'
     state: 'present'
