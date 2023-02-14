@@ -7,7 +7,9 @@
   register: subscription_manager_output
   check_mode: 'false'
   changed_when: 'false'
-  when: 'ansible_distribution == "RedHat"'
+  when:
+    - 'ansible_distribution == "RedHat"'
+    - 'ansible_distribution_major_version == "8"'
 
 - name: 'Debug: Output variable subscription_manager_output'
   debug:
