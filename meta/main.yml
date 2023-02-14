@@ -2,7 +2,7 @@ galaxy_info:
   role_name: 'RedHat_install_epel-release'
   namespace: 'johanneskastl'
   author: 'Johannes Kastl'
-  description: 'Install the epel-release package on RHEL 7 and 8'
+  description: 'Install the epel-release package on RHEL 7, 8 and 9'
   company: 'B1 Systems GmbH'
 
   license: 'BSD-3-Clause'
