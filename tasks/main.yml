@@ -23,7 +23,7 @@
 
 - name: 'Debug: Output variable subscription_manager_output'
   ansible.builtin.debug:
-   var: subscription_manager_output
+    var: subscription_manager_output
   when: 'ansible_distribution == "RedHat"'
 
 - name: 'Install epel-release key via https'
