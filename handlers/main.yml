@@ -5,10 +5,10 @@
   ansible.builtin.command: "yum makecache fast"
   when:
     - 'ansible_distribution == "RedHat"'
-    - 'ansible_distribution_major_version == "7"'
+    - 'ansible_distribution_major_version | int == 7'
 
 - name: "Run 'dnf makecache'"
   ansible.builtin.command: "dnf makecache"
   when:
     - 'ansible_distribution == "RedHat"'
-    - 'ansible_distribution_major_version >= "8"'
+    - 'ansible_distribution_major_version | int >= 8'
