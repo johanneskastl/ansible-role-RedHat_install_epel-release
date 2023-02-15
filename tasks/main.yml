@@ -63,7 +63,7 @@
     key: '/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}'
     state: 'present'
   when: 'ansible_distribution == "RedHat"'
-  ignore_errors: "{{ ansible_check_mode |default(false)}}"
+  ignore_errors: "{{ ansible_check_mode | default(false) }}"
 
 - name: 'Flush handlers'
   ansible.builtin.meta: flush_handlers
