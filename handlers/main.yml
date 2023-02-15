@@ -1,6 +1,13 @@
 ---
 # RedHat_install_epel-release/handlers/main.yml
 
+- name: 'Install epel-release key from /etc/pki/rpm-gpg/'
+  ansible.builtin.rpm_key:
+    key: '/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}'
+    state: 'present'
+  when:
+    - 'ansible_distribution == "RedHat"'
+
 - name: "Run 'yum makecache fast'"
   ansible.builtin.command: "yum makecache fast"
   when:
