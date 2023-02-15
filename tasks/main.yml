@@ -31,7 +31,6 @@
     key: 'https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}'
     state: 'present'
   when: 'ansible_distribution == "RedHat"'
-  ignore_errors: "{{ ansible_check_mode | default(false) }}"
 
 - name: 'Enable the codeready-builder-for-rhel-8 repository'
   ansible.builtin.shell:
