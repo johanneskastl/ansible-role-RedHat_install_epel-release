@@ -1,3 +1,5 @@
+![Ansible Lint](https://github.com/johanneskastl/ansible-role-RedHat_install_epel-release/workflows/Ansible%20Lint/badge.svg)
+
 RedHat_install_epel-release
 =========
 
