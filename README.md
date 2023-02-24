@@ -25,7 +25,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-        - { role: 'johanneskastl.RedHat_install_epel-release' }
+        - role: 'johanneskastl.RedHat_install_epel-release'
 
 License
 -------
