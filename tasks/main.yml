@@ -1,25 +1,15 @@
 ---
 # RedHat_install_epel-release/tasks/main.yml
 
-- name: 'Check if codeready-builder-for-rhel-8 repository is enabled already'
+- name: 'Check if codeready-builder-for-rhel-X repository is enabled already'
   ansible.builtin.shell:
-    cmd: "LANG=C subscription-manager repos|grep -A 3 codeready-builder-for-rhel-8-{{ ansible_architecture }}-rpms|grep '^Enabled.*$'"
+    cmd: "LANG=C subscription-manager repos|grep -A 3 codeready-builder-for-rhel-{{ ansible_distribution_major_version | int }}-{{ ansible_architecture }}-rpms|grep '^Enabled.*$'"
   register: subscription_manager_output
   check_mode: 'false'
   changed_when: 'false'
   when:
     - 'ansible_distribution == "RedHat"'
-    - 'ansible_distribution_major_version | int == 8'
-
-- name: 'Check if codeready-builder-for-rhel-9 repository is enabled already'
-  ansible.builtin.shell:
-    cmd: "LANG=C subscription-manager repos|grep -A 3 codeready-builder-for-rhel-9-{{ ansible_architecture }}-rpms|grep '^Enabled.*$'"
-  register: subscription_manager_output
-  check_mode: 'false'
-  changed_when: 'false'
-  when:
-    - 'ansible_distribution == "RedHat"'
-    - 'ansible_distribution_major_version | int == 9'
+    - 'ansible_distribution_major_version | int == 8 or ansible_distribution_major_version | int == 9'
 
 - name: 'Debug: Output variable subscription_manager_output'
   ansible.builtin.debug:
