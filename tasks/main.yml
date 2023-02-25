@@ -24,13 +24,15 @@
 - name: 'Debug: Output variable subscription_manager_output'
   ansible.builtin.debug:
     var: subscription_manager_output
-  when: 'ansible_distribution == "RedHat"'
+  when:
+    - 'ansible_distribution == "RedHat"'
 
 - name: 'Install epel-release key via https'
   ansible.builtin.rpm_key:
     key: 'https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}'
     state: 'present'
-  when: 'ansible_distribution == "RedHat"'
+  when:
+    - 'ansible_distribution == "RedHat"'
 
 - name: 'Enable the codeready-builder-for-rhel-8 repository'
   ansible.builtin.shell:
@@ -52,7 +54,8 @@
   ansible.builtin.package:
     name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
     state: 'present'
-  when: 'ansible_distribution == "RedHat"'
+  when:
+    - 'ansible_distribution == "RedHat"'
   notify:
     - 'Install epel-release key from /etc/pki/rpm-gpg/'
     - "run 'yum makecache fast'"
