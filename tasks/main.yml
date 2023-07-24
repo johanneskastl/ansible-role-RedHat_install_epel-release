@@ -4,6 +4,7 @@
 - name: 'Check if codeready-builder-for-rhel-X repository is enabled already'
   ansible.builtin.shell:
     cmd: >
+      set -o pipefail
       LANG=C subscription-manager repos|grep -A 3
       codeready-builder-for-rhel-{{ ansible_distribution_major_version | int }}-{{ ansible_architecture }}-rpms
       | grep '^Enabled.*$'
