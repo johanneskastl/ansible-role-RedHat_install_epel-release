@@ -47,8 +47,8 @@
     - 'ansible_distribution == "RedHat"'
   notify:
     - 'Install epel-release key from /etc/pki/rpm-gpg/'
-    - "run 'yum makecache fast'"
-    - "run 'dnf makecache'"
+    - "Run 'yum makecache fast'"
+    - "Run 'dnf makecache'"
 
 - name: 'Flush handlers'
   ansible.builtin.meta: flush_handlers
