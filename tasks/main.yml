@@ -30,7 +30,7 @@
 
 - name: 'Enable the codeready-builder-for-rhel-X repository'
   ansible.builtin.command:
-    cmd: 'subscription-manager repos --enable codeready-builder-for-rhel-{{ ansible_distribution_major_version | int }}-$(arch)-rpms'
+    cmd: 'subscription-manager repos --enable codeready-builder-for-rhel-{{ ansible_distribution_major_version | int }}-{{ ansible_architecture }}-rpms'
   # Command tasks do always show up as changed, and ansible-lint complains
   # We safeguard and only run this task if it is needed. So if it is being run,
   # it does enable the repo and thus should show changed.
